@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller{
 
@@ -14,18 +15,21 @@ class UserController extends Controller{
          return view('login');
   }
 
- public function login(){
-     try {
-
-//    $credentials = $request->only('email', 'password');
-//     $user = User::where(['email' => $request->email, 'password' => $request->password]);
-//            dd(Auth::login($user));
-      return redirect()->intended('dashboard');
-
-     } catch (\Exception $th) {
-         dd($th->getMessage());
-
-     }
+ public function login(Request $request) {
+    //login user using the user model
+    $user = User::where('email', $request->email)->first();
+    //check if user exists
+    if($user) {
+        //check if password matches
+        if(Hash::check($request->password, $user->password)) {
+            //login user
+            Auth::login($user);
+            //redirect to dashboard
+            return redirect()->route('dashboard');
+        }
+    }
+    
+        
     }
 
  public function create(){
@@ -39,14 +43,19 @@ class UserController extends Controller{
             "name" => ["required"],
             "email" => ["required"],
             "contact" => ["required","max:10"],
-            "password" => ["required","min:4"],
+            //password must be confirmed
+            "password" => ["required","confirmed", "min:4"],
+            
+            //passw
+
         ]);
 
         $user = User::create([
             "name" => $request->input("name"),
             "email" => $request->input("email"),
             "contact" => $request->input("contact"),
-            "password" => $request->input("password")
+            "password" => Hash::make($request->input("password")),
+            "role" => "user",
         ]);
 
     } catch (\Exception $ex) {

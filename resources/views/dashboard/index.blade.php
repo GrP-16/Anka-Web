@@ -12,7 +12,7 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard\\</h6>
+          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
           {{-- <h6 class="font-weight-bolder mb-0">Dashboard {{ session('status') }} </h6> --}}
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -131,7 +131,7 @@
 
                 
 
-                <h4 class="mb-0">{{ sum($totalpx[4]) }}</h4>
+                <h4 class="mb-0">{{ $total_sales }}</h4>
 
 
 
@@ -158,7 +158,7 @@
                 <p class="text-sm mb-0 text-capitalize"><b>TOTAL BUYERS</b></p>
 
 
-                <h4 class="mb-0">{{ count($total_buyers)  }}</h4>
+                <h4 class="mb-0">{{$total_buyers  }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">

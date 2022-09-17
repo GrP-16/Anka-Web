@@ -77,7 +77,12 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" method="post" href="{{ route('user.logout') }}"  type="submit">Logout</a>
+      
+        <form action="{{ route('user.logout') }}" method="POST">
+          @csrf
+          <button type="submit" class="btn btn-white w-100">Logout</button>
+        </form>
+
       </div>
     </div>
   </aside>

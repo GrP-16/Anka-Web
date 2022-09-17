@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DashboardResource;
+use App\Models\CustomerTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,11 +16,12 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $users = DB::table('customertransactions')->select('*')->get();
-        return view('dashboard.index')->with('total_buyers', $users);
+         $total_buyers = CustomerTransaction::count();
+         //total price for a column called totalprice
+         $total_sales = CustomerTransaction::sum('totalprice');
+        return view('dashboard.index', compact('total_buyers', 'total_sales'));
 
-        $pr = DB::table('customertransactions')->select('totalprice')->get();
-        return view('dashboard.index')->with('totalpx', $pr);
+
 
     }
 

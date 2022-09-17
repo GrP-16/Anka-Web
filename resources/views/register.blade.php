@@ -26,13 +26,15 @@
                     <div class="input-group input-group-outline mb-3">
                       <input name="email" type="email" placeholder="Email *" class="form-control" required>
                     </div>
-
                     <div class="input-group input-group-outline mb-3">
-                        <input name="contact" type="number"  placeholder="Contact(s) *" class="form-control" required>
-                      </div>
+                      <input name="contact" type="text" placeholder="Enter contact*" class="form-control" required>
+                    </div>
 
                     <div class="input-group input-group-outline mb-3">
                       <input name="password" type="password" placeholder="Password *" class="form-control" required>
+                    </div>
+                         <div class="input-group input-group-outline mb-3">
+                      <input name="password_confirmation" type="password" placeholder="Confirm Password " class="form-control" required>
                     </div>
 
                     <div class="form-check form-check-info text-start ps-0">
