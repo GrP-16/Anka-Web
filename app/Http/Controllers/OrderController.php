@@ -19,8 +19,7 @@ class OrderController extends Controller
         $cart = $request->cart;
         //get the user id from the request session
         $user_id = $request->session()->get('id');
-        
-        
+    
         
         //loop through the cart items
         foreach($cart as $item){
