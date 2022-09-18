@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DashboardResource;
 use App\Models\CustomerTransaction;
+use App\Models\ProductDetails;
 use App\Models\RecentBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +18,9 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        
-         $total_buyers = RecentBooking::count();
+         //count total buyers and distinct by user_id
+            $total_buyers = RecentBooking::distinct('user_id')->count('user_id');
+         
          //total price for a column called totalprice
          $total_sales = RecentBooking::sum('totalcost');
         return view('dashboard.index', compact('total_buyers', 'total_sales'));
@@ -54,11 +56,16 @@ class DashboardController extends Controller
 
 
     public function showProductDetails(){
-        $users = DB::table('productdetails')->select('*')->get();
+        //show product details where quantity is greater than 0
+        //$users = DB::table('productdetails')->select('*')->where('quantity', '>', 0)->get();
+
+        $users = ProductDetails::where('quantity_left', '>', 0)->get();
         return view('customer.productdetails')->with('users', $users);
     }
 
     public function showCustomers(){
+        //distinct users by user_id
+        
         $users = DB::table('recentbookings')->select('*')->get();
         return view('reports.customertransactions')->with('users', $users);
     }
