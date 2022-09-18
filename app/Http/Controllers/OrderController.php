@@ -37,13 +37,14 @@ class OrderController extends Controller
             ]);
             //get the particant who wons the product
             $participant =  ParticipantDetials::where('name', $item['owner'])->first();
+            
             //check if return_custoer is null
             if($participant->return_customer == null){
                 //if null set it to 1
                  //create an array of user_id
                     $data = array($user_id);
                     //convert the array to json
-                    $data = json_encode($user_id);
+                    $data = json_encode($data);
                     $totalPoints = $item['quantity'];
                     //update participant details
                     ParticipantDetials::where('name', $item['owner'])->update([
@@ -62,13 +63,19 @@ class OrderController extends Controller
                     //if quantity is 1 add 2 points else add 4 points
                     if($item['quantity'] == 1){
                         $totalPoints = $participant->points + 2;
-                    }else{
-                        $totalPoints = $participant->points + 4;
-                    }
-                    //update participant details
+                        //update participant details
                     ParticipantDetials::where('name', $item['owner'])->update([
                         'points' => $totalPoints,
                     ]);
+
+                    }else{
+                        $totalPoints = $participant->points + 4;
+                        //update participant details
+                    ParticipantDetials::where('name', $item['owner'])->update([
+                        'points' => $totalPoints,
+                    ]);
+                    }
+                    
                     
                 }else{
                     //if the user id is not in the array

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('DateOfBirth');
             $table->string('points')->default(0);
+            //timestamp
+            $table->timestamps();
         });
     }
 

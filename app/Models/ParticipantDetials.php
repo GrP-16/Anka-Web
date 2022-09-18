@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ParticipantDetials extends Model
 {
     use HasFactory;
-    protected $table = 'participantdetials';
+    protected $table = 'participantdetails';
     //fillable
     protected $fillable = [
         'name',
