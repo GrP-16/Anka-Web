@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
              $table->string('rate');
              $table->string('productowner');
+             $table->timestamps();
         });
     }
 

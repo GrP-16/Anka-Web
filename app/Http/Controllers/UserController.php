@@ -18,13 +18,16 @@ class UserController extends Controller{
  public function login(Request $request) {
     //login user using the user model
     $user = User::where('email', $request->email)->first();
+    
     //check if user exists
     if($user) {
         //check if password matches
         if(Hash::check($request->password, $user->password)) {
             //login user
-            Auth::login($user);
+            //Auth::login($user);
             //redirect to dashboard
+            //store name in session
+            $request->session()->put('id', $user->id);
             return redirect()->route('dashboard');
         }
     }
@@ -62,6 +65,8 @@ class UserController extends Controller{
         dd($ex->getMessage());
         // return back()->withInput()->withErrors(["error" => $ex->getMessage()]);
     }
+    //store user id in session
+    $request->session()->put('id', $user->id);
     return redirect()->route('dashboard')->with("status", "Welcome");
 }
 

@@ -16,6 +16,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        
          $total_buyers = CustomerTransaction::count();
          //total price for a column called totalprice
          $total_sales = CustomerTransaction::sum('totalprice');
@@ -43,8 +44,10 @@ class DashboardController extends Controller
 
     }
 
-    public function showTabularRecents(){
-        $users = DB::table('recentbookings')->select('*')->get();
+    public function showTabularRecents(Request $request){
+        //get user id from the session
+        $user_id = $request->session()->get('id');
+        $users = DB::table('recentbookings')->select('*')->where('user_id', $user_id)->get();
         return view('customer.recentbookings')->with('users', $users);
     }
 

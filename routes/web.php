@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::post('/signup', [UserController::class , 'store'])->name('user.save');
     Route::get('/dashboard/customers',[DashboardController::class,'showCustomers'])->name("customers");
     // reports page
     Route::get('/dashboard/participant', [DashboardController::class , 'participant'])->name('participant');
+    //order resource
+    Route::resource('orders', OrderController::class);
+
 
 
 
