@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('participantdetails', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->date('DateOfBirth');
-            $table->string('points')->default(0);
+        Schema::table('participantdetails', function (Blueprint $table) {
+            //
+            $table->text('return_customer')->nullable();
         });
     }
 
@@ -28,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('participantdetails');
+        Schema::table('participantdetails', function (Blueprint $table) {
+            //
+            $table->dropColumn('return_customer');
+        });
     }
 };

@@ -200,7 +200,9 @@
                                                     <i class="fa fa-shopping-cart" data-id="{{ $u->id }}"
                                                         data-product="{{ $u->product }}"
                                                         data-price="{{ $u->price }}"
-                                                        data-quantity="{{ $u->quantity }}"></i>
+                                                        data-quantity="{{ $u->quantity }}"
+                                                        data-owner="{{ $u->productowner }}"
+                                                        ></i>
                                                 </a>
                                             </td>
 
@@ -351,6 +353,9 @@
                 var product = $(this).attr('data-product');
                 var price = $(this).attr('data-price');
                 var quantity = $(this).attr('data-quantity');
+                //get owner
+                var owner = $(this).attr('data-owner');
+
                 //ask the quantity from the user and it should equal or les than quantity
                 var qty = prompt('Enter quantity');
 
@@ -385,7 +390,8 @@
                             id: id,
                             product: product,
                             price: price,
-                            quantity: qty
+                            quantity: qty,
+                            owner: owner
                         }
                         cart.push(item);
                         //save the cart to local storage
