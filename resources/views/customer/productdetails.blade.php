@@ -288,12 +288,13 @@
                 }
                 //show view button only if the cart is not empty
                 if (cart.length > 0) {
+                  //append total items and total price to the div with id cart
+                  
                     $('#cart').append('<div class="row"><div class="col-md-6"><h6 class="mb-0">Total Items: ' +
                         cart.length +
                         '</h6></div><div class="col-md-6 text-end"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View</button></div>'
                         );
 
-                //show total price
                 $('#cart').append('<div class="row"><div class="col-md-6"><h6 class="mb-0">Total price: ' + total +
                     '</h6></div><div class="col-md-6 text-end"></div>');
                 } else {

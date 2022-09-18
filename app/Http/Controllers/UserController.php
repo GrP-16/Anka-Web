@@ -28,6 +28,8 @@ class UserController extends Controller{
             //redirect to dashboard
             //store name in session
             $request->session()->put('id', $user->id);
+            //store user role
+            $request->session()->put('role', $user->role);
             return redirect()->route('dashboard');
         }
     }
@@ -67,6 +69,8 @@ class UserController extends Controller{
     }
     //store user id in session
     $request->session()->put('id', $user->id);
+    //store user role in session
+    $request->session()->put('role', $user->role);
     return redirect()->route('dashboard')->with("status", "Welcome");
 }
 

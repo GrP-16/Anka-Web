@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DashboardResource;
 use App\Models\CustomerTransaction;
+use App\Models\RecentBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,9 +18,9 @@ class DashboardController extends Controller
      */
     public function index() {
         
-         $total_buyers = CustomerTransaction::count();
+         $total_buyers = RecentBooking::count();
          //total price for a column called totalprice
-         $total_sales = CustomerTransaction::sum('totalprice');
+         $total_sales = RecentBooking::sum('totalcost');
         return view('dashboard.index', compact('total_buyers', 'total_sales'));
 
 
@@ -58,7 +59,7 @@ class DashboardController extends Controller
     }
 
     public function showCustomers(){
-        $users = DB::table('customertransactions')->select('*')->get();
+        $users = DB::table('recentbookings')->select('*')->get();
         return view('reports.customertransactions')->with('users', $users);
     }
     /*

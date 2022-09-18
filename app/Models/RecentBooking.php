@@ -15,6 +15,7 @@ class RecentBooking extends Model
         'unitprice',
         'totalcost',
         'deliveryaddress',
+        'user_id',
     ];
 
 }

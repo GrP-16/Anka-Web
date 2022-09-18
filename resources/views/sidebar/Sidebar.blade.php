@@ -27,6 +27,9 @@
             <span class="nav-link-text ms-1">Graph Reports</span>
           </a>
         </li> --}}
+      
+       
+        @if (session('role') == 'admin')
 
         <li class="nav-item">
             <a class="nav-link text-white " href="{{ route('tabular') }}">
@@ -36,15 +39,20 @@
               <span class="nav-link-text ms-1">Tabular Reports</span>
             </a>
           </li>
+         @endif 
 
+          @if (session('role') == 'admin')
           <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('customers') }}">
+            <a class="nav-link text-white "  href="{{ route('customers') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">table_view</i>
+                <i class="material-icons opacity-10">admin_panel_settings</i>
               </div>
-              <span class="nav-link-text ms-1">Customer Transactions</span>
+              <span class="nav-link-text ms-1">Admin</span>
             </a>
           </li>
+          @endif
+
+
 
           <li class="nav-item">
             <a class="nav-link text-white " href="{{ route('recents') }}">
