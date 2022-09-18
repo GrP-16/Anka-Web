@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\DashboardResource;
 use App\Models\CustomerTransaction;
+use App\Models\ParticipantDetials;
 use App\Models\ProductDetails;
 use App\Models\RecentBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 
 class DashboardController extends Controller
@@ -121,5 +123,21 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function productgraph(Request $request)
+    {
+        //get all products and their quantity left
+        $products = ProductDetails::all();
+
+        return  Response::json($products);
+
+    }
+    public function getpoints(Request $request)
+    {
+        //get all products and their quantity left
+        $details = ParticipantDetials::all();
+
+        return  Response::json($details);
+
     }
 }

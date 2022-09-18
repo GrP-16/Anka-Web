@@ -25,6 +25,10 @@ Route::post('/signup', [UserController::class , 'store'])->name('user.save');
     //order resource
     Route::resource('orders', OrderController::class);
 
+    //
+    Route::get('/getproductgraph', [DashboardController::class , 'productgraph'])->name('productgraph');
+    Route::get('/getpoints', [DashboardController::class , 'getpoints'])->name('getpoints');
+
 
 
 
