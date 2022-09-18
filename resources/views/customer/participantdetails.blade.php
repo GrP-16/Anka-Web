@@ -134,7 +134,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NAME</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">PRODUCT</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DATE OF BIRTH</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">POSITION</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">POINTS</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -152,7 +152,7 @@
                         </td>
 
                         <td class="text-xs  font-weight-bold">
-                            {{ $u->position }}
+                            {{ $u->points }}
                         </td>
                     </tr>
                     @endforeach
