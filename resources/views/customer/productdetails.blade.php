@@ -358,25 +358,31 @@
 
                 //ask the quantity from the user and it should equal or les than quantity
                 var qty = prompt('Enter quantity');
+                //dont accept if qty is empty
+
 
                 //check if qty is not empty
-                if (qty == '') {
-                    alert('Please enter quantity');
-                }
+                
                 //change the quantity to integer and qty to integer
-                var qty = parseInt(qty);
-                var quantity = parseInt(quantity);
+                
 
 
 
                  if (qty == '') {
                     alert('Please enter quantity');
                 }
-                 else if(qty > quantity){
+                 else if(parseInt(qty) > parseInt(quantity)){
                     alert('Quantity should be less than or equal to ' + quantity);
                     return false;
                 }
-                else {
+                 else if(parseInt(qty)<1){
+                    alert('Quantity should be greater than 0');
+                    return false;
+                 } 
+                else { 
+                     var qty = parseInt(qty);
+                var quantity = parseInt(quantity);
+
 
                     //get the cart from local storage
                     var cart = JSON.parse(sessionStorage.getItem('cart'));

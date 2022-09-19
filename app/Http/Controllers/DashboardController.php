@@ -23,7 +23,7 @@ class DashboardController extends Controller
          //count total buyers and distinct by user_id
             $total_buyers = RecentBooking::distinct('user_id')->count('user_id');
          //return paricipant with the highest points
-         $maxValue = ParticipantDetials::max('points');
+         $maxValue = ParticipantDetials::min('points');
           $detials = ParticipantDetials::where('points', $maxValue)->first();
         //   dd($detials->name);
          //total price for a column called totalprice
