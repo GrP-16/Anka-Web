@@ -15,15 +15,16 @@ class OrderController extends Controller
     //create store function
     public function store(Request $request){
         //validate the request
-
+        // dd($request);
         //get the cart items from the request
         $cart = $request->cart;
         //get the user id from the request session
         $user_id = $request->session()->get('id');
+        //dd($user_id);
 
         //create a
-    
-        
+
+
         //loop through the cart items
         foreach($cart as $item){
             //create a new order
@@ -31,27 +32,34 @@ class OrderController extends Controller
                 'product' => $item['product'],
                 'quantity' => $item['quantity'],
                 'unitprice' => $item['price'],
-                'totalcost' => $item['price']* $item['quantity'],
+                'totalcost' => ($item['price'] * $item['quantity']),
                 'deliveryaddress' => $request->address,
                 "user_id" => $user_id,
             ]);
             //get the particant who wons the product
             $participant =  ParticipantDetials::where('name', $item['owner'])->first();
-            
+
             //check if return_custoer is null
             if($participant->return_customer == null){
+
+                //return paricipant with the highest points
+                // $maxValue = ParticipantDetials::max('id');
+
                 //if null set it to 1
                  //create an array of user_id
                     $data = array($user_id);
                     //convert the array to json
                     $data = json_encode($data);
                     $totalPoints = $item['quantity'];
+
+
+
                     //update participant details
                     ParticipantDetials::where('name', $item['owner'])->update([
                         'return_customer' => $data,
                         'points' => $totalPoints,
                     ]);
-    
+
             }else{
                 //first get the return customer
                 $return_customer = $participant->return_customer;
@@ -75,8 +83,8 @@ class OrderController extends Controller
                         'points' => $totalPoints,
                     ]);
                     }
-                    
-                    
+
+
                 }else{
                     //if the user id is not in the array
                     //add the user id to the array
@@ -93,7 +101,7 @@ class OrderController extends Controller
                         'points' => $totalPoints,
                     ]);
                 }
-            
+
 
             }
 

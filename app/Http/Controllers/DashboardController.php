@@ -22,10 +22,13 @@ class DashboardController extends Controller
     public function index() {
          //count total buyers and distinct by user_id
             $total_buyers = RecentBooking::distinct('user_id')->count('user_id');
-         
+         //return paricipant with the highest points
+         $maxValue = ParticipantDetials::max('points');
+          $detials = ParticipantDetials::where('points', $maxValue)->first();
+        //   dd($detials->name);
          //total price for a column called totalprice
          $total_sales = RecentBooking::sum('totalcost');
-        return view('dashboard.index', compact('total_buyers', 'total_sales'));
+        return view('dashboard.index', compact('total_buyers', 'total_sales','maxValue', 'detials'));
 
 
 
@@ -67,7 +70,7 @@ class DashboardController extends Controller
 
     public function showCustomers(){
         //distinct users by user_id
-        
+
         $users = DB::table('recentbookings')->select('*')->get();
         return view('reports.customertransactions')->with('users', $users);
     }

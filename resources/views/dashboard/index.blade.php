@@ -184,31 +184,32 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
-                        {{-- <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize"><b>NEW CUSTOMERS</b></p>
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                                <i class="material-icons opacity-10">person</i>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize"><b>BEST PARTICIPANT</b></p>
 
 
-                <h4 class="mb-0">3,462</h4>
-              </div>
-            </div> --}}
-                        {{-- <hr class="dark horizontal my-0"> --}}
-                        {{-- <div class="card-footer p-3"> --}}
-                        {{-- <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p> --}}
+                                <h4 class="mb-0">{{ $detials->name }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">HAS THE AWARD WITH {{ $detials->points }}</span> <b>POINTS</b></p>
 
 
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <h1>WEEKLY PROGRESS REPORTS</h1>
+
+        <h3>WEEKLY PROGRESS REPORTS</h3>
         <div class="row mt-4">
             <div class="col-lg-4 col-md-6 mt-4 mb-4">
                 <div class="card z-index-2 ">
@@ -226,7 +227,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -267,7 +268,7 @@
                         intersect: false,
                         mode: 'index',
                     },
-                    
+
                 },
             });
 
@@ -400,7 +401,7 @@
                         mydata.push(value.points)
                     });
 
-                                        DrawPoints(labels, mydata)
+                     DrawPoints(labels, mydata)
 
                 }
             })
