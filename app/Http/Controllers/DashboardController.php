@@ -28,7 +28,12 @@ class DashboardController extends Controller
         //   dd($detials->name);
          //total price for a column called totalprice
          $total_sales = RecentBooking::sum('totalcost');
-        return view('dashboard.index', compact('total_buyers', 'total_sales','maxValue', 'detials'));
+
+         $qty = RecentBooking::sum('quantity');
+         $qtylft = ProductDetails::sum('quantity_left');
+         $pdtsbgt = $qty - $qtylft;
+         $percentagesale = ($pdtsbgt/$qty)*100;
+        return view('dashboard.index', compact('total_buyers', 'total_sales','maxValue', 'detials','percentagesale'));
 
 
 
