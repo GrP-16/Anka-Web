@@ -504,6 +504,9 @@
                     } else {
                         alert('Order not submitted');
                     }
+                },
+                failure: function(response) {
+                    alert('Order not submitted');
                 }
             });
         });
