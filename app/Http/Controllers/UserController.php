@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller{
 
   public function index() {
-      
+
          return view('login');
   }
 
  public function login(Request $request) {
     //login user using the user model
     $user = User::where('email', $request->email)->first();
-    
+
     //check if user exists
     if($user) {
         //check if password matches
@@ -33,9 +33,9 @@ class UserController extends Controller{
             return redirect()->route('dashboard');
         }
     }
-    //else return redirect()->route('login'):
-    
-        
+    // else return redirect()->route('login'):
+
+
     }
 
  public function create(){
@@ -51,7 +51,7 @@ class UserController extends Controller{
             "contact" => ["required","max:10"],
             //password must be confirmed
             "password" => ["required","confirmed", "min:4"],
-            
+
             //passw
 
         ]);

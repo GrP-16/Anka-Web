@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('participantdetails', function (Blueprint $table) {
-            //
             $table->text('position')->nullable();
         });
     }

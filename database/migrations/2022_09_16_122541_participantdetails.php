@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('participantdetails', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('product');
+            $table->string('product');
             $table->date('DateOfBirth');
             $table->string('points')->default(0);
             //timestamp

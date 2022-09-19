@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('productdetails', function (Blueprint $table) {
             //
-            $table->integer('quantity_left')->default(0);
+            $table->integer('quantity_left');
         });
     }
 
