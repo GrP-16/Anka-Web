@@ -15,6 +15,8 @@ class UserController extends Controller{
          return view('login');
   }
 
+   //create a view that orders participants by points
+   
  public function login(Request $request) {
     //login user using the user model
     $user = User::where('email', $request->email)->first();
