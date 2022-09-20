@@ -291,7 +291,7 @@
                 //show view button only if the cart is not empty
                 if (cart.length > 0) {
                   //append total items and total price to the div with id cart
-                  
+
                     $('#cart').append('<div class="row"><div class="col-md-6"><h6 class="mb-0">Total Items: ' +
                         cart.length +
                         '</h6></div><div class="col-md-6 text-end"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">View</button></div>'
@@ -358,21 +358,31 @@
 
                 //ask the quantity from the user and it should equal or les than quantity
                 var qty = prompt('Enter quantity');
+                //dont accept if qty is empty
+
 
                 //check if qty is not empty
-                if (qty == '') {
+                
+                //change the quantity to integer and qty to integer
+                
+
+
+
+                 if (qty == '') {
                     alert('Please enter quantity');
                 }
-                //change the quantity to integer and qty to integer
-                var qty = parseInt(qty);
-                var quantity = parseInt(quantity);
-
-
-
-                if (qty > quantity) {
+                 else if(parseInt(qty) > parseInt(quantity)){
                     alert('Quantity should be less than or equal to ' + quantity);
                     return false;
-                } else {
+                }
+                 else if(parseInt(qty)<1){
+                    alert('Quantity should be greater than 0');
+                    return false;
+                 } 
+                else { 
+                     var qty = parseInt(qty);
+                var quantity = parseInt(quantity);
+
 
                     //get the cart from local storage
                     var cart = JSON.parse(sessionStorage.getItem('cart'));
@@ -397,7 +407,7 @@
                         //save the cart to local storage
                         sessionStorage.setItem('cart', JSON.stringify(cart));
                         //update the total items in cart
-                        
+
                         //show success message to the user
                         alert('Product added to cart');
                     } else {
@@ -406,7 +416,7 @@
                         //save the cart to local storage
                         sessionStorage.setItem('cart', JSON.stringify(cart));
                         //update the total items in cart
-                        
+
                         alert('Product added to cart');
                     }
                 }
@@ -465,7 +475,7 @@
                 return false;
             }
 
-            
+
 
             var total = 0;
             for (var i = 0; i < cart.length; i++) {
@@ -484,31 +494,44 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            // console.log(order);
+
             $.ajax({
-                url: '{{ route("orders.store") }}',
-                method: 'POST',
+                url:"/orders",
+                method: "POST",
                 beforeSend: function() {
                     $('#onCheckout').html('Processing...');
+
                 },
                 data: order,
-                success: function(response) {
+                success: () => {
                     //check if the order was submitted successfully
-                    
-                    if (response == 'success') {
-                        //empty the cart
-                        sessionStorage.setItem('cart', JSON.stringify([]));
-                        //show success message to the user
-                        alert('Order submitted successfully');
-                        //redirect to the orders page
-                        window.location.href = "{{route('recents')}}";
-                    } else {
-                        alert('Order not submitted');
-                    }
+                   // alert("Working on it");
+                    $('#onCheckout').html('CheckOut');
+                    // if (response == 'success') {
+                    //     $('#onCheckout').html('Checkout');
+                    //     //empty the cart
+                        // sessionStorage.setItem('cart', JSON.stringify([]));
+                        // //show success message to the user
+                        // alert('Order submitted successfully');
+                        // //redirect to the orders page
+                        // window.location.href = "{{route('recents')}}";
+                    // } else {
+                    //     alert('Order not submitted');
+                    // }
                 }
+            }).done(function () {
+                sessionStorage.setItem('cart', JSON.stringify([]));
+                        //show success message to the user
+                 alert('Order submitted successfully');
+                        //redirect to the orders page
+                 window.location.href = "{{route('recents')}}";
+
             });
         });
     </script>
 @endsection
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
 </script>

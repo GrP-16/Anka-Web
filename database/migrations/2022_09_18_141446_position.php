@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('productdetails', function (Blueprint $table) {
-            //
-            $table->integer('quantity_left');
+        Schema::table('participantdetails', function (Blueprint $table) {
+            $table->text('position')->nullable();
         });
     }
 
@@ -26,9 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('productdetails', function (Blueprint $table) {
+        Schema::table('participantdetails', function (Blueprint $table) {
             //
-            $table->dropColumn('quantity_left');
+            $table->dropColumn('position');
         });
     }
 };

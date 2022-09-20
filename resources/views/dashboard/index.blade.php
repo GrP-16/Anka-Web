@@ -13,8 +13,11 @@
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                    <h3>SUMMARY PROGRESS REPORTS</h3>
                     {{-- <h6 class="font-weight-bolder mb-0">Dashboard {{ session('status') }} </h6> --}}
                 </nav>
+
+                @if (session('role') == 'admin')
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <div class="input-group input-group-outline">
@@ -125,7 +128,10 @@
                     </ul>
                 </div>
             </div>
+            @endif
         </nav>
+
+
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
@@ -153,8 +159,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last
-                                week</p>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"> {{ number_format($percentagesale,3) }} </span>% sale</p>
 
 
 
@@ -184,31 +189,32 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
-                        {{-- <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize"><b>NEW CUSTOMERS</b></p>
+                        <div class="card-header p-3 pt-2">
+                            <div
+                                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                                <img width="70px", height="70px" src="{{asset('assets/img/goldenAward.webp')}}"/>
+                            </div>
+                            <div class="text-end pt-1">
+                                <p class="text-sm mb-0 text-capitalize"><b>BEST PARTICIPANT</b></p>
 
 
-                <h4 class="mb-0">3,462</h4>
-              </div>
-            </div> --}}
-                        {{-- <hr class="dark horizontal my-0"> --}}
-                        {{-- <div class="card-footer p-3"> --}}
-                        {{-- <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p> --}}
+                                <h4 class="mb-0">{{ $detials->name }}</h4>
+                            </div>
+                        </div>
+                        <hr class="dark horizontal my-0">
+                        <div class="card-footer p-3">
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">HAS THE GOLDEN AWARD WITH {{ $detials->points }}</span> <b>POINTS</b></p>
 
 
-                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <h1>WEEKLY PROGRESS REPORTS</h1>
+
+        <h3>BAR GRAPH AND PIE-CHART</h3>
         <div class="row mt-4">
             <div class="col-lg-4 col-md-6 mt-4 mb-4">
                 <div class="card z-index-2 ">
@@ -226,7 +232,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -237,7 +243,7 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function DrawPoints(labels, mydata) {
+        function DrawPoints(labels, mydata, colors) {
 
             var ctx = document.getElementById("points").getContext("2d");
              new Chart(ctx, {
@@ -250,7 +256,7 @@
                         borderWidth: 0,
                         borderRadius: 4,
                         borderSkipped: false,
-                        backgroundColor: "rgba(255, 255, 255, .8)",
+                        backgroundColor: colors,
                         data: mydata,
                         maxBarThickness: 6
                     }, ],
@@ -267,7 +273,7 @@
                         intersect: false,
                         mode: 'index',
                     },
-                    
+
                 },
             });
 
@@ -386,6 +392,8 @@
             //product graph
             let labels = []
             let mydata = []
+            let colors = []
+            let mycolors = ['#63cdff', 'teal' , 'green','yellow','black','purple','white']
             let id = "chart-bars"
             $.ajax({
                 url: "{{ route('getpoints') }}",
@@ -398,9 +406,10 @@
 
                         labels.push(value.name)
                         mydata.push(value.points)
+                        colors.push(mycolors[key])
                     });
 
-                                        DrawPoints(labels, mydata)
+                     DrawPoints(labels, mydata, colors)
 
                 }
             })
