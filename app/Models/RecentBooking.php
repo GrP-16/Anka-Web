@@ -16,6 +16,7 @@ class RecentBooking extends Model
         'totalcost',
         'deliveryaddress',
         'user_id',
+        'name'
     ];
 
 }

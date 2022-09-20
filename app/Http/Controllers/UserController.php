@@ -16,13 +16,17 @@ class UserController extends Controller{
   }
 
    //create a view that orders participants by points
-   
+
  public function login(Request $request) {
+    // try {
+         //code...
+
     //login user using the user model
     $user = User::where('email', $request->email)->first();
 
     //check if user exists
     if($user) {
+       // dd(Hash::check($request->password, $user->password));
         //check if password matches
         if(Hash::check($request->password, $user->password)) {
             //login user
@@ -32,11 +36,25 @@ class UserController extends Controller{
             $request->session()->put('id', $user->id);
             //store user role
             $request->session()->put('role', $user->role);
-            return redirect()->route('dashboard');
+            $request->session()->put('name', $user->name);
+
+             if($user->role=='admin'){
+                return redirect()->route('dashboard');
+             }
+             else{
+                return redirect()->route('productDetails')->with("status", "Welcome");
+
+             }
+
+
+        } else {
+            return back()->withErrors(['error' => 'Invalid details']);
         }
     }
     // else return redirect()->route('login'):
-
+  //  } catch (\Exception $th) {
+       // dd($th->getMessage());
+   // }
 
     }
 
@@ -46,7 +64,7 @@ class UserController extends Controller{
 
     // save user details
  public function store(Request $request){
-     try {
+    // try {
          $this->validate( $request, [
             "name" => ["required"],
             "email" => ["required"],
@@ -66,15 +84,17 @@ class UserController extends Controller{
             "role" => "user",
         ]);
 
-    } catch (\Exception $ex) {
-        dd($ex->getMessage());
+   // } catch (\Exception $ex) {
+    //    dd($ex->getMessage());
         // return back()->withInput()->withErrors(["error" => $ex->getMessage()]);
-    }
+   // }
     //store user id in session
+
     $request->session()->put('id', $user->id);
     //store user role in session
     $request->session()->put('role', $user->role);
-    return redirect()->route('dashboard')->with("status", "Welcome");
+    $request->session()->put('name', $user->name);
+    return redirect()->route('productDetails')->with("status", "Welcome");
 }
 
 public function logout(Request $request){

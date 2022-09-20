@@ -9,6 +9,7 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
+        @if (session('role') == 'admin')
 
         <li class="nav-item">
           <a class="nav-link text-white active bg-gradient-primary" href="{{ route('dashboard') }}">
@@ -18,7 +19,7 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-
+  @endif
         {{-- <li class="nav-item">
           <a class="nav-link text-white " href="{{ route('participant') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -27,8 +28,8 @@
             <span class="nav-link-text ms-1">Graph Reports</span>
           </a>
         </li> --}}
-      
-       
+
+{{-- tabular reports --}}
         @if (session('role') == 'admin')
 
         <li class="nav-item">
@@ -39,18 +40,9 @@
               <span class="nav-link-text ms-1">Tabular Reports</span>
             </a>
           </li>
-         @endif 
+         @endif
 
-          @if (session('role') == 'admin')
-          <li class="nav-item">
-            <a class="nav-link text-white "  href="{{ route('customers') }}">
-              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">admin_panel_settings</i>
-              </div>
-              <span class="nav-link-text ms-1">Customer Transactions</span>
-            </a>
-          </li>
-          @endif
+
 
 
 
@@ -85,7 +77,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-      
+
         <form action="{{ route('user.logout') }}" method="POST">
           @csrf
           <button type="submit" class="btn btn-white w-100">Logout</button>

@@ -138,8 +138,8 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">TOTAL COST</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">DELIVERY ADDRESS</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">DATE</th>
-                      <th></th>
-                    </tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">NAME</th>
+                                         </tr>
                   </thead>
                   <tbody>
                     @foreach ($users as $u )
@@ -161,6 +161,9 @@
                         </td>
                         <td class="text-xs  font-weight-bold">
                             {{ $u->created_at }}
+                        </td>
+                        <td class="text-xs  font-weight-bold">
+                            {{ $u->name }}
                         </td>
                     </tr>
                     @endforeach

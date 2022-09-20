@@ -60,8 +60,18 @@ class DashboardController extends Controller
     public function showTabularRecents(Request $request){
         //get user id from the session
         $user_id = $request->session()->get('id');
-        $users = DB::table('recentbookings')->select('*')->where('user_id', $user_id)->get();
-        return view('customer.recentbookings')->with('users', $users);
+        $role = $request->session()->get('role');
+        if($role=='admin'){
+            $users = RecentBooking::all();
+            return view('customer.recentbookings')->with('users', $users);
+        }
+        else{
+
+            $users = DB::table('recentbookings')->select('*')->where('user_id', $user_id)->get();
+            return view('customer.recentbookings')->with('users', $users);
+
+        }
+
     }
 
 
@@ -73,12 +83,7 @@ class DashboardController extends Controller
         return view('customer.productdetails')->with('users', $users);
     }
 
-    public function showCustomers(){
-        //distinct users by user_id
-
-        $users = DB::table('recentbookings')->select('*')->get();
-        return view('reports.customertransactions')->with('users', $users);
-    }
+  
     /*
      * Store a newly created resource in storage.
      *

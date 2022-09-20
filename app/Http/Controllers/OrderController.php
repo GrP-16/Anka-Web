@@ -20,6 +20,8 @@ class OrderController extends Controller
         $cart = $request->cart;
         //get the user id from the request session
         $user_id = $request->session()->get('id');
+        $name =  $request->session()->get('name');
+
         //dd($user_id);
 
         //create a
@@ -35,6 +37,7 @@ class OrderController extends Controller
                 'totalcost' => ($item['price'] * $item['quantity']),
                 'deliveryaddress' => $request->address,
                 "user_id" => $user_id,
+                "name"=>$name
             ]);
             //get the particant who wons the product
             $participant =  ParticipantDetials::where('name', $item['owner'])->first();

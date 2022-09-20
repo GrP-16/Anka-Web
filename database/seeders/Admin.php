@@ -18,7 +18,7 @@ class Admin extends Seeder
     {
         //create a user wit role admin
         //use try  catch to avoid duplicate entry error
-        try {
+        //try {
             User::create([
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
@@ -26,12 +26,12 @@ class Admin extends Seeder
                 'role' => 'admin',
                 'contact' => '0123456789',
             ]);
-        } catch (\Throwable $th) {
+       // } catch (\Throwable $th) {
             //throw $th;
-            dd($th->getMessage());
-        }
+       //     dd($th->getMessage());
+       // }
 
-        
+
 
     }
 }

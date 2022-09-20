@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('recentbookings', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('product');
             $table->string('quantity');
             $table->string('unitprice');

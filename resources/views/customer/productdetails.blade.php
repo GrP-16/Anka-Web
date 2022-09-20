@@ -166,7 +166,7 @@
                                             PRODUCT OWNER</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                            ACTIONS</th>
+                                            TAP TO ORDER</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -362,9 +362,9 @@
 
 
                 //check if qty is not empty
-                
+
                 //change the quantity to integer and qty to integer
-                
+
 
 
 
@@ -378,8 +378,8 @@
                  else if(parseInt(qty)<1){
                     alert('Quantity should be greater than 0');
                     return false;
-                 } 
-                else { 
+                 }
+                else {
                      var qty = parseInt(qty);
                 var quantity = parseInt(quantity);
 
